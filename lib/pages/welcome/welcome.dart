@@ -54,8 +54,8 @@ class _WelcomeState extends State<Welcome> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     dotsCount: 3,
                     decorator: DotsDecorator(
-                      color: Colors.grey,
-                      activeColor: Colors.blue,
+                      color: AppColors.greyColor,
+                      activeColor: AppColors.primaryBlue,
                       size: const Size.square(8),
                       activeSize: Size(18, 8),
                       activeShape: RoundedRectangleBorder(
@@ -102,7 +102,7 @@ class _WelcomeState extends State<Welcome> {
               title,
               style: TextStyle(
                   fontSize: 24.sp,
-                  color: blackColor,
+                  color: AppColors.primaryBlackColor,
                   fontWeight: FontWeight.normal),
             ),
           ),
@@ -115,7 +115,7 @@ class _WelcomeState extends State<Welcome> {
               subTitle,
               style: TextStyle(
                   fontSize: 14.sp,
-                  color: blackColor.withOpacity(0.5),
+                  color: AppColors.blackZeroFive,
                   fontWeight: FontWeight.normal),
             ),
           ),
@@ -141,7 +141,7 @@ class _WelcomeState extends State<Welcome> {
             width: 375.w,
             height: 50.h,
             decoration: BoxDecoration(
-                color: Colors.blue,
+                color: AppColors.primaryBlue,
                 boxShadow: [
                   BoxShadow(
                       color: Colors.grey.withOpacity(0.5),
@@ -155,7 +155,7 @@ class _WelcomeState extends State<Welcome> {
                 buttonName,
                 style: TextStyle(
                     fontSize: 16.sp,
-                    color: blackColor.withOpacity(0.5),
+                    color: AppColors.primaryWhiteColor,
                     fontWeight: FontWeight.normal),
               ),
             ),
@@ -165,5 +165,3 @@ class _WelcomeState extends State<Welcome> {
     );
   }
 }
-
-// The reusableWidget function remains the same.

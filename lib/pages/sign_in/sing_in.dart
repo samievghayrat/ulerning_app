@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ulerning_app/constants/boxDecorations.dart';
+import 'package:ulerning_app/constants/colors.dart';
+import 'package:ulerning_app/constants/fontStyles.dart';
 import 'package:ulerning_app/pages/sign_in/widgets_login/widgets.dart';
 
 class SignIn extends StatefulWidget {
@@ -13,7 +16,7 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: AppColors.primaryWhiteColor,
       child: SafeArea(
         child: Scaffold(
           appBar: appBarLogIn(),
@@ -65,14 +68,23 @@ Widget buildLoginAndRegisterButton(
       height: 50.h,
       width: 325.w,
       decoration: BoxDecoration(
-        color: buttonType == "register" ? Colors.orange[300] : Colors.blue,
-        borderRadius: BorderRadius.circular(15.w),
+        color: buttonType == "register"
+            ? AppColors.primaryWhiteColor
+            : AppColors.primaryBlue,
+        border: buttonType == "register"
+            ? Border.all(color: AppColors.greyColor)
+            : null,
+        borderRadius: BorderRadius.circular(
+          15.w,
+        ),
       ),
       child: Center(
         child: Text(
           buttonName,
           style: TextStyle(
-              color: Colors.white,
+              color: buttonType == "register"
+                  ? AppColors.primaryBlackColor
+                  : AppColors.primaryWhiteColor,
               fontSize: 16.sp,
               fontWeight: FontWeight.normal),
         ),
@@ -102,14 +114,8 @@ Widget forgotPassword() {
     width: 260.w,
     child: GestureDetector(
       onTap: () {},
-      child: Text(
-        "Forgot Password",
-        style: TextStyle(
-            color: Colors.black,
-            decoration: TextDecoration.underline,
-            decorationColor: Colors.blue,
-            fontSize: 12.sp),
-      ),
+      child:
+          Text("Forgot Password", style: AppFontSizes.primaryButtonTextStyle),
     ),
   );
 }
@@ -131,7 +137,7 @@ Widget reusableText(String text) {
       margin: EdgeInsets.only(bottom: 5.h),
       child: Text(
         text,
-        style: TextStyle(fontSize: 14, color: Colors.grey.withOpacity(0.9)),
+        style: AppFontSizes.greyColorTextStyle,
       ));
 }
 
@@ -140,13 +146,7 @@ Widget buildTextField(String hintText, String textType, String iconName) {
     margin: EdgeInsets.only(bottom: 10.h),
     width: 325.w,
     height: 50.h,
-    decoration: BoxDecoration(
-      color: Colors.transparent,
-      borderRadius: BorderRadius.all(
-        Radius.circular(15.w),
-      ),
-      border: Border.all(color: Colors.black),
-    ),
+    decoration: AppBoxDecorations.textFieldBoxDecoration,
     child: Row(
       children: [
         Container(
@@ -174,9 +174,9 @@ Widget buildTextField(String hintText, String textType, String iconName) {
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.transparent),
                 ),
-                hintStyle: TextStyle(color: Colors.grey.withOpacity(0.5))),
+                hintStyle: AppFontSizes.hintTextInTextFieldStyle),
             style: TextStyle(
-                color: Colors.black,
+                color: AppColors.primaryBlackColor,
                 fontFamily: "Avenir",
                 fontWeight: FontWeight.normal,
                 fontSize: 12.sp),
