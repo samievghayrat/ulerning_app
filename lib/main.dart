@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -5,7 +6,13 @@ import 'package:ulerning_app/pages/sign_in/sing_in.dart';
 import 'package:ulerning_app/pages/welcome/bloc/welcome_blocs.dart';
 import 'package:ulerning_app/pages/welcome/welcome.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  try {
+    await Firebase.initializeApp();
+  } catch (e) {
+    print('Errpr is $e');
+  }
   runApp(const MyApp());
 }
 
