@@ -2,10 +2,10 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ulerning_app/welcome/bloc/welcome_blocs.dart';
-import 'package:ulerning_app/welcome/bloc/welcome_evengts.dart';
 
-import '../constants/colors.dart';
+import '../../constants/colors.dart';
+import 'bloc/welcome_blocs.dart';
+import 'bloc/welcome_evengts.dart';
 import 'bloc/welcome_states.dart';
 
 class Welcome extends StatefulWidget {
@@ -130,7 +130,7 @@ class _WelcomeState extends State<Welcome> {
               // Navigator.push(context,
               //     MaterialPageRoute(builder: (builder) => MyHomePage()));
               Navigator.of(context)
-                  .pushNamedAndRemoveUntil("myHomePage", (route) => false);
+                  .pushNamedAndRemoveUntil("singIn", (route) => false);
             }
             int a = 5;
             print('The button was $a tapped');

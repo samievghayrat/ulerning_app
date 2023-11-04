@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ulerning_app/welcome/bloc/welcome_evengts.dart';
-import 'package:ulerning_app/welcome/bloc/welcome_states.dart';
+import 'package:ulerning_app/pages/welcome/bloc/welcome_evengts.dart';
+import 'package:ulerning_app/pages/welcome/bloc/welcome_states.dart';
 
 class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
   WelcomeBloc() : super(WelcomeState()) {
