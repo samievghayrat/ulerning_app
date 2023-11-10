@@ -1,12 +1,44 @@
 class RegisterStates {
-  late final String userName;
-  late final String email;
-  late final String password;
-  late final String confirmPassword;
+  late String userName;
+  late String email;
+  late String password;
+  late String confirmPassword;
 
   RegisterStates(
-      {required this.userName,
-      required this.email,
-      required this.password,
-      required this.confirmPassword});
+      {this.userName = '',
+      this.email = '',
+      this.password = '',
+      this.confirmPassword = ''});
+
+  RegisterStates copyUserName(String newUserName) {
+    return RegisterStates(
+        userName: newUserName,
+        email: this.email,
+        password: this.password,
+        confirmPassword: confirmPassword);
+  }
+
+  RegisterStates copyEmail(String newEmail) {
+    return RegisterStates(
+        userName: userName,
+        email: newEmail,
+        password: password,
+        confirmPassword: confirmPassword);
+  }
+
+  RegisterStates copyPassword(String newPassword) {
+    return RegisterStates(
+        userName: userName,
+        email: email,
+        password: newPassword,
+        confirmPassword: confirmPassword);
+  }
+
+  RegisterStates copyConfPassword(String newConfPassword) {
+    return RegisterStates(
+        userName: userName,
+        email: email,
+        password: password,
+        confirmPassword: newConfPassword);
+  }
 }

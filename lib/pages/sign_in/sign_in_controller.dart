@@ -16,8 +16,8 @@ class SignInController {
       String emailAddress = state.email;
       String pass_word = state.password;
 
-      print("Email address is: $emailAddress");
-      print("Password from bloc is: $emailAddress");
+      print("Email address is: $emailAddress and $pass_word");
+      // print("Password from bloc is: $pass_word");
       if (emailAddress.isEmpty || pass_word.isEmpty) {
         toastInfo(msg: ("Email or password is empty"));
         // print("Email address is: $emailAddress");

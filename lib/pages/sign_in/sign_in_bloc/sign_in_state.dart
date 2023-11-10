@@ -10,10 +10,10 @@ class SignInState {
   }
 
   SignInState copyEmail(String email) {
-    return SignInState(email: email, password: this.password);
+    return SignInState(email: email, password: password);
   }
 
   SignInState copyPassword(String password) {
-    return SignInState(email: this.email, password: password);
+    return SignInState(email: email, password: password);
   }
 }
