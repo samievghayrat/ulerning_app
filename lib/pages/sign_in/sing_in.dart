@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulerning_app/constants/boxDecorations.dart';
 import 'package:ulerning_app/constants/colors.dart';
 import 'package:ulerning_app/constants/fontStyles.dart';
+import 'package:ulerning_app/pages/sign_in/sign_in_bloc/sign_in_bloc.dart';
+import 'package:ulerning_app/pages/sign_in/sign_in_bloc/sign_in_event.dart';
+import 'package:ulerning_app/pages/sign_in/sign_in_bloc/sign_in_state.dart';
+import 'package:ulerning_app/pages/sign_in/sign_in_controller.dart';
 import 'package:ulerning_app/pages/sign_in/widgets_login/widgets.dart';
 
 class SignIn extends StatefulWidget {
@@ -15,54 +20,74 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: AppColors.primaryWhiteColor,
-      child: SafeArea(
-        child: Scaffold(
-          appBar: appBarLogIn(),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  thirdPartyLogin(context),
-                  reusableText(
-                    'Or use your email account login',
-                  ),
-                  SizedBox(
-                    height: 40.h,
-                  ),
-                  reusableText('Email address'),
-                  buildTextField("Please enter your email", "email", "user"),
-                  SizedBox(
-                    height: 5.h,
-                  ),
-                  reusableText('Password'),
-                  buildTextField("Password", "password", "lock"),
-                  SizedBox(
-                    height: 5.h,
-                  ),
-                  forgotPassword(),
-                  SizedBox(
-                    height: 50.h,
-                  ),
-                  buildLoginAndRegisterButton('Log in', 'login', context),
-                  buildLoginAndRegisterButton('Register', 'register', context),
-                ],
+    return BlocBuilder<SignInBloc, SignInState>(builder: (context, state) {
+      return Container(
+        color: AppColors.primaryWhiteColor,
+        child: SafeArea(
+          child: Scaffold(
+            appBar: appBarLogIn(state.email),
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    thirdPartyLogin(context),
+                    reusableText(
+                      'Or use your email account login',
+                    ),
+                    SizedBox(
+                      height: 40.h,
+                    ),
+                    reusableText('Email address'),
+                    buildTextField("Please enter your email", "email", "user",
+                        (value) {
+                      context.read<SignInBloc>().add(EmailEvent(email: value));
+                    }),
+                    SizedBox(
+                      height: 5.h,
+                    ),
+                    reusableText('Password'),
+                    buildTextField("Password", "password", "lock", (value) {
+                      context
+                          .read<SignInBloc>()
+                          .add(PasswordEvent(password: value));
+                    }),
+                    SizedBox(
+                      height: 5.h,
+                    ),
+                    forgotPassword(),
+                    SizedBox(
+                      height: 50.h,
+                    ),
+                    buildLoginAndRegisterButton('Log in', 'login', () async {
+                      try {
+                        await SignInController(context: context)
+                            .handleSignIn(type: "email");
+                        print('Login button was pressed');
+                      } catch (e) {
+                        print('Error from sign in is: $e');
+                      }
+                    }),
+                    buildLoginAndRegisterButton('Register', 'register', () {
+                      print('Register button was pressed');
+                      Navigator.of(context).pushNamed("register");
+                    }),
+                  ],
+                ),
               ),
             ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 }
 
 Widget buildLoginAndRegisterButton(
-    String buttonName, String buttonType, BuildContext context) {
+    String buttonName, String buttonType, void Function()? func) {
   return GestureDetector(
-    onTap: () {},
+    onTap: () => func!(),
     child: Container(
       margin: EdgeInsets.only(bottom: 20.h),
       height: 50.h,
@@ -71,7 +96,7 @@ Widget buildLoginAndRegisterButton(
         color: buttonType == "register"
             ? AppColors.primaryWhiteColor
             : AppColors.primaryBlue,
-        border: buttonType == "register"
+        border: (buttonType == "register")
             ? Border.all(color: AppColors.greyColor)
             : null,
         borderRadius: BorderRadius.circular(
@@ -113,7 +138,9 @@ Widget forgotPassword() {
     height: 44.h,
     width: 260.w,
     child: GestureDetector(
-      onTap: () {},
+      onTap: () {
+        print('Forgot password button pressed');
+      },
       child:
           Text("Forgot Password", style: AppFontSizes.primaryButtonTextStyle),
     ),
@@ -123,7 +150,9 @@ Widget forgotPassword() {
 Widget reusableIcon(String iconName) {
   return IconButton(
     iconSize: 5,
-    onPressed: () {},
+    onPressed: () {
+      print("reusable icon of the third party registration pressed");
+    },
     icon: Image.asset(
       "assets/icons/${iconName}.png",
       width: 40,
@@ -141,7 +170,8 @@ Widget reusableText(String text) {
       ));
 }
 
-Widget buildTextField(String hintText, String textType, String iconName) {
+Widget buildTextField(String hintText, String textType, String iconName,
+    void Function(String value)? func) {
   return Container(
     margin: EdgeInsets.only(bottom: 10.h),
     width: 325.w,
@@ -159,7 +189,10 @@ Widget buildTextField(String hintText, String textType, String iconName) {
           width: 270.w,
           height: 50.h,
           child: TextField(
-            keyboardType: TextInputType.multiline,
+            onChanged: (value) => func!(value),
+            keyboardType: textType == 'email'
+                ? TextInputType.emailAddress
+                : TextInputType.multiline,
             decoration: InputDecoration(
                 hintText: hintText,
                 border: OutlineInputBorder(

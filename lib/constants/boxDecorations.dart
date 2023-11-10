@@ -9,6 +9,6 @@ class AppBoxDecorations {
     borderRadius: BorderRadius.all(
       Radius.circular(15.w),
     ),
-    border: Border.all(color: AppColors.primaryBlackColor),
+    border: Border.all(color: AppColors.blackZeroFive),
   );
 }

@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../constants/colors.dart';
 
-AppBar appBarLogIn() {
+AppBar appBarLogIn(String appBarTitle) {
   return AppBar(
     centerTitle: true,
     bottom: PreferredSize(
@@ -14,7 +14,7 @@ AppBar appBarLogIn() {
       ),
     ),
     title: Text(
-      'Log in',
+      appBarTitle,
       style: TextStyle(
           color: Colors.black, fontSize: 16.sp, fontWeight: FontWeight.normal),
     ),

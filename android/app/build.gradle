@@ -1,8 +1,8 @@
-    plugins {
+plugins {
     id "com.android.application"
+    id 'com.google.gms.google-services'
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
-        id 'com.google.gms.google-services'
 }
 
 def localProperties = new Properties()
@@ -23,9 +23,11 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+
+
 android {
     namespace "com.ghayratsamiev.ulerning_app"
-    compileSdkVersion flutter.compileSdkVersion
+    compileSdkVersion 34
     ndkVersion flutter.ndkVersion
 
     compileOptions {
@@ -46,8 +48,8 @@ android {
         applicationId "com.ghayratsamiev.ulerning_app"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion flutter.minSdkVersion
-        targetSdkVersion flutter.targetSdkVersion
+        minSdkVersion 22
+        targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
@@ -59,6 +61,10 @@ android {
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
         }
+        debug {
+
+//            buildConfigField 'String', 'FIREBASE_ANALYTICS_COLLECTION_ENABLED', true
+        }
     }
 }
 
@@ -66,8 +72,12 @@ flutter {
     source '../..'
 }
 
+
 dependencies {
     implementation 'com.android.support:multidex:2.0.1' // You can use the latest version
     implementation platform('com.google.firebase:firebase-bom:32.5.0')
     implementation 'com.google.firebase:firebase-analytics'
 }
+
+apply plugin: 'com.google.gms.google-services'
+

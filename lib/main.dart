@@ -1,15 +1,24 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ulerning_app/pages/bloc_providers/bloc_providers.dart';
+import 'package:ulerning_app/pages/register/register.dart';
 import 'package:ulerning_app/pages/sign_in/sing_in.dart';
-import 'package:ulerning_app/pages/welcome/bloc/welcome_blocs.dart';
 import 'package:ulerning_app/pages/welcome/welcome.dart';
 
-Future<void> main() async {
+Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   try {
-    await Firebase.initializeApp();
+    await Firebase.initializeApp(
+      options: FirebaseOptions(
+          apiKey: "AIzaSyDSWNcywlC1srrw6PZAvKS2_M01fo9kVZQ",
+          appId: "com.ghayratsamiev.ulerning_app",
+          messagingSenderId: "638514424931",
+          projectId: "ulearning-app-2e72"),
+    );
+    FirebaseDatabase.instance.setPersistenceEnabled(true);
   } catch (e) {
     print('Errpr is $e');
   }
@@ -23,11 +32,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => WelcomeBloc(),
-        ),
-      ],
+      providers: AppBlocProviders.allBlocProviders,
       child: ScreenUtilInit(
         builder: (context, child) => MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -40,6 +45,7 @@ class MyApp extends StatelessWidget {
           routes: {
             "myHomePage": (context) => MyHomePage(),
             "singIn": (context) => SignIn(),
+            "register": (context) => RegistrationPage(),
           },
         ),
       ),
