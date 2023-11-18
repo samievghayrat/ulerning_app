@@ -3,10 +3,10 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ulerning_app/pages/bloc_providers/bloc_providers.dart';
 import 'package:ulerning_app/pages/register/register.dart';
 import 'package:ulerning_app/pages/sign_in/sing_in.dart';
 import 'package:ulerning_app/pages/welcome/welcome.dart';
+import 'package:ulerning_app/routes/routes2.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: AppBlocProviders.allBlocProviders,
+      providers: [...AppPages.allBlocProviders(context)],
       child: ScreenUtilInit(
         builder: (context, child) => MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -42,10 +42,11 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
           ),
           home: Welcome(),
+          onGenerateRoute: AppPages.generateRouteSettings,
           routes: {
-            "myHomePage": (context) => MyHomePage(),
-            "singIn": (context) => SignIn(),
-            "register": (context) => RegistrationPage(),
+            "/myHomePage": (context) => MyHomePage(),
+            "/sign_in": (context) => SignIn(),
+            "/register": (context) => RegistrationPage(),
           },
         ),
       ),

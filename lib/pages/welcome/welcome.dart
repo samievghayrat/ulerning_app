@@ -130,7 +130,7 @@ class _WelcomeState extends State<Welcome> {
               // Navigator.push(context,
               //     MaterialPageRoute(builder: (builder) => MyHomePage()));
               Navigator.of(context)
-                  .pushNamedAndRemoveUntil("singIn", (route) => false);
+                  .pushNamedAndRemoveUntil("sign_in", (route) => false);
             }
             int a = 5;
             print('The button was $a tapped');

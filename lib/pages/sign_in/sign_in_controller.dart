@@ -1,9 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ulerning_app/pages/homepage/homepage.dart';
 import 'package:ulerning_app/pages/sign_in/sign_in_bloc/sign_in_bloc.dart';
 import 'package:ulerning_app/widget/toast_widget.dart';
+
+import '../application/application_page.dart';
 
 class SignInController {
   final BuildContext context;
@@ -47,7 +48,7 @@ class SignInController {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (builder) => HomePage(),
+              builder: (builder) => ApplicationPage(),
             ),
           );
         } else {
