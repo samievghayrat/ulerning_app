@@ -4,8 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ulerning_app/pages/sign_in/sign_in_bloc/sign_in_bloc.dart';
 import 'package:ulerning_app/widget/toast_widget.dart';
 
-import '../application/application_page.dart';
-
 class SignInController {
   final BuildContext context;
 
@@ -45,12 +43,8 @@ class SignInController {
           toastInfo(msg: ("The user $user exists"));
           // Do something
 
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (builder) => ApplicationPage(),
-            ),
-          );
+          Navigator.pushNamedAndRemoveUntil(
+              context, "/application", (route) => false);
         } else {
           toastInfo(msg: 'User does not exist');
         }

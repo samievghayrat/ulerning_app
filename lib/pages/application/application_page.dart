@@ -17,7 +17,7 @@ class ApplicationPage extends StatefulWidget {
 }
 
 class _ApplicationPageState extends State<ApplicationPage> {
-  int _index = 0;
+  // int _index = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -25,78 +25,38 @@ class _ApplicationPageState extends State<ApplicationPage> {
       return SafeArea(
         child: Scaffold(
           appBar: appBarLogIn('Application Page'),
-          body: buildPage(_index),
-          bottomNavigationBar: BottomNavigationBar(
-            currentIndex: _index,
-            elevation: 0,
-            type: BottomNavigationBarType.fixed,
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
-            selectedItemColor: AppColors.primaryBlue,
-            unselectedItemColor: AppColors.blackZeroFive,
-            onTap: (value) {
-              setState(() {
-                context.read<AppBloc>().add(TriggerEvent(value));
-                // value = _index;
-              });
-            },
-            items: [
-              BottomNavigationBarItem(
-                label: 'Home',
-                icon: SizedBox(
-                  height: 15.h,
-                  width: 15.w,
-                  child: Image.asset(
-                    'assets/icons/home.png',
-                    color: AppColors.primaryBlue,
-                  ),
-                ),
-              ),
-              BottomNavigationBarItem(
-                label: 'search',
-                icon: SizedBox(
-                  height: 15.h,
-                  width: 15.w,
-                  child: Image.asset(
-                    'assets/icons/search.png',
-                    color: AppColors.primaryBlue,
-                  ),
-                ),
-              ),
-              BottomNavigationBarItem(
-                label: 'play-video',
-                icon: SizedBox(
-                  height: 15.h,
-                  width: 15.w,
-                  child: Image.asset(
-                    'assets/icons/play-circle1.png',
-                    color: AppColors.primaryBlue,
-                  ),
-                ),
-              ),
-              BottomNavigationBarItem(
-                label: 'message',
-                icon: SizedBox(
-                  height: 15.h,
-                  width: 15.w,
-                  child: Image.asset(
-                    'assets/icons/message.png',
-                    color: AppColors.primaryBlue,
-                  ),
-                ),
-              ),
-              BottomNavigationBarItem(
-                label: 'profile',
-                icon: SizedBox(
-                  height: 15.h,
-                  width: 15.w,
-                  child: Image.asset(
-                    'assets/icons/person2.png',
-                    color: AppColors.primaryBlue,
-                  ),
-                ),
-              ),
-            ],
+          body: buildPage(state.index),
+          bottomNavigationBar: Container(
+            width: 375.w,
+            height: 58.h,
+            decoration: BoxDecoration(
+                color: AppColors.primaryBlue,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20.h),
+                    topRight: Radius.circular(20.h)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.1),
+                    spreadRadius: 1,
+                    blurRadius: 1,
+                  )
+                ]),
+            child: BottomNavigationBar(
+              currentIndex: state.index,
+              elevation: 0,
+              type: BottomNavigationBarType.fixed,
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
+              selectedItemColor: AppColors.primaryBlue,
+              unselectedItemColor: AppColors.blackZeroFive,
+              onTap: (value) {
+                setState(() {
+                  context.read<AppBloc>().add(TriggerEvent(value));
+                  // value = _index;
+                });
+              },
+              items: bottomTubs,
+            ),
           ),
         ),
       );
