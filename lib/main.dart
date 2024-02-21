@@ -7,6 +7,7 @@ import 'package:ulerning_app/pages/register/register.dart';
 import 'package:ulerning_app/pages/sign_in/sing_in.dart';
 import 'package:ulerning_app/pages/welcome/welcome.dart';
 import 'package:ulerning_app/routes/routes2.dart';
+import 'package:ulerning_app/shared_preferences/global.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +23,7 @@ Future main() async {
   } catch (e) {
     print('Errpr is $e');
   }
+  await Global.init();
   runApp(const MyApp());
 }
 
