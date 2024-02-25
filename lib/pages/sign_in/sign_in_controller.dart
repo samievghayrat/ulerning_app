@@ -1,8 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ulerning_app/constants/constant.dart';
 import 'package:ulerning_app/pages/sign_in/sign_in_bloc/sign_in_bloc.dart';
 import 'package:ulerning_app/widget/toast_widget.dart';
+
+import '../../shared_preferences/global.dart';
 
 class SignInController {
   final BuildContext context;
@@ -40,9 +43,11 @@ class SignInController {
         var user = credentials.user;
 
         if (user != null) {
-          toastInfo(msg: ("The user $user exists"));
+          // toastInfo(msg: ("The user $user exists"));
+          toastInfo(msg: ("Logging in, please wait..."));
           // Do something
-
+          Global.storageServices
+              .setString(AppConstants.STORAGE_USER_TOKEN_KEY, '1224566789');
           Navigator.pushNamedAndRemoveUntil(
               context, "/application", (route) => false);
         } else {

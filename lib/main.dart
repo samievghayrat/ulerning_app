@@ -3,9 +3,9 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ulerning_app/pages/application/application_page.dart';
 import 'package:ulerning_app/pages/register/register.dart';
 import 'package:ulerning_app/pages/sign_in/sing_in.dart';
-import 'package:ulerning_app/pages/welcome/welcome.dart';
 import 'package:ulerning_app/routes/routes2.dart';
 import 'package:ulerning_app/shared_preferences/global.dart';
 
@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: Welcome(),
+          home: ApplicationPage(),
           onGenerateRoute: AppPages.generateRouteSettings,
           routes: {
             "/myHomePage": (context) => MyHomePage(),

@@ -2,6 +2,8 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ulerning_app/constants/constant.dart';
+import 'package:ulerning_app/shared_preferences/global.dart';
 
 import '../../constants/colors.dart';
 import 'bloc/welcome_blocs.dart';
@@ -129,8 +131,12 @@ class _WelcomeState extends State<Welcome> {
             } else {
               // Navigator.push(context,
               //     MaterialPageRoute(builder: (builder) => MyHomePage()));
+              Global.storageServices
+                  .setBool(AppConstants.STORAGE_DEVICE_OPEN_FIRST_TIME, true);
+              print(
+                  "the value of cache of first open is ${Global.storageServices.getDeviceFirstOpen()}");
               Navigator.of(context)
-                  .pushNamedAndRemoveUntil("sign_in", (route) => false);
+                  .pushNamedAndRemoveUntil("/sign_in", (route) => false);
             }
             int a = 5;
             print('The button was $a tapped');

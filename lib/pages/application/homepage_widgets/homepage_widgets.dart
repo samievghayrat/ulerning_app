@@ -1,25 +1,44 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ulerning_app/pages/application/homepage_widgets/home_page.dart';
 
 import '../../../constants/colors.dart';
 
+AppBar buildAppbar() {
+  return AppBar(
+    title: Container(
+      margin: EdgeInsets.all(4),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: 15.w,
+            height: 12.h,
+            child: Image.asset('assets/icons/menu.png'),
+          ),
+          GestureDetector(
+            child: Container(
+              height: 40.h,
+              width: 40.w,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage("assets/icons/person.png"))),
+            ),
+          )
+        ],
+      ),
+    ),
+  );
+}
+
 Widget buildPage(int index) {
   List<Widget> _widget = [
-    Center(
-      child: Text("Home"),
-    ),
-    Center(
-      child: Text("Seach"),
-    ),
-    Center(
-      child: Text("Course"),
-    ),
-    Center(
-      child: Text("Chat"),
-    ),
-    Center(
-      child: Text("Profile"),
-    ),
+    HomePage(),
+    Text("Seach"),
+    Text("Course"),
+    Text("Chat"),
+    Text("Profile"),
   ];
   return _widget[index];
 }

@@ -8,6 +8,7 @@ import 'package:ulerning_app/pages/sign_in/sing_in.dart';
 import 'package:ulerning_app/pages/welcome/bloc/welcome_blocs.dart';
 import 'package:ulerning_app/pages/welcome/welcome.dart';
 import 'package:ulerning_app/routes/names.dart';
+import 'package:ulerning_app/shared_preferences/global.dart';
 
 import '../pages/application/application_page.dart';
 
@@ -57,7 +58,23 @@ class AppPages {
     if (settings.name != null) {
       var result = routes.where((element) => element.route == settings.name);
       if (result.isNotEmpty) {
+        print("first log");
+        bool deviceFirstOpen = Global.storageServices.getDeviceFirstOpen();
         print('valid route ${settings.name}');
+        if (result.first.route == RouteNames.INITIAL && deviceFirstOpen) {
+          bool isLoggedIn = Global.storageServices.getIsLoggedIn();
+          if (isLoggedIn) {
+            return MaterialPageRoute(
+                builder: (builder) => const ApplicationPage(),
+                settings: settings);
+          }
+
+          print("second log");
+          // Global.storageServices
+          //     .setBool(AppConstants.STORAGE_DEVICE_OPEN_FIRST_TIME, true);
+          return MaterialPageRoute(
+              builder: (builder) => const SignIn(), settings: settings);
+        }
         return MaterialPageRoute(
             builder: (builder) => result.first.page, settings: settings);
       }

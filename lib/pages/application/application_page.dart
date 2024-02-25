@@ -5,7 +5,6 @@ import 'package:ulerning_app/constants/colors.dart';
 import 'package:ulerning_app/pages/application/application_bloc/application_States.dart';
 import 'package:ulerning_app/pages/application/application_bloc/application_bloc.dart';
 import 'package:ulerning_app/pages/application/application_bloc/application_events.dart';
-import 'package:ulerning_app/pages/sign_in/widgets_login/widgets.dart';
 
 import 'homepage_widgets/homepage_widgets.dart';
 
@@ -24,8 +23,7 @@ class _ApplicationPageState extends State<ApplicationPage> {
     return BlocBuilder<AppBloc, AppStates>(builder: (context, state) {
       return SafeArea(
         child: Scaffold(
-          appBar: appBarLogIn('Application Page'),
-          body: buildPage(state.index),
+          body: Center(child: buildPage(state.index)),
           bottomNavigationBar: Container(
             width: 375.w,
             height: 58.h,
@@ -47,7 +45,7 @@ class _ApplicationPageState extends State<ApplicationPage> {
               type: BottomNavigationBarType.fixed,
               showSelectedLabels: false,
               showUnselectedLabels: false,
-              selectedItemColor: AppColors.primaryBlue,
+              selectedItemColor: AppColors.primaryBlackColor,
               unselectedItemColor: AppColors.blackZeroFive,
               onTap: (value) {
                 setState(() {
