@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ulerning_app/pages/application/application_bloc/application_bloc.dart';
+import 'package:ulerning_app/pages/application/homepage_widgets/home_page.dart';
+import 'package:ulerning_app/pages/application/homepage_widgets/homepage_bloc/homepage_bloc.dart';
 import 'package:ulerning_app/pages/register/register.dart';
 import 'package:ulerning_app/pages/register/register_bloc/register_bloc.dart';
 import 'package:ulerning_app/pages/sign_in/sign_in_bloc/sign_in_bloc.dart';
@@ -10,6 +12,7 @@ import 'package:ulerning_app/pages/welcome/welcome.dart';
 import 'package:ulerning_app/routes/names.dart';
 import 'package:ulerning_app/shared_preferences/global.dart';
 
+import '../constants/constant.dart';
 import '../pages/application/application_page.dart';
 
 class AppPages {
@@ -42,6 +45,13 @@ class AppPages {
         create: (_) => AppBloc(),
       ),
     ),
+    PageEntity(
+      route: RouteNames.HOME_PAGE,
+      page: HomePage(),
+      bloc: BlocProvider(
+        create: (_) => HomePageBloc(),
+      ),
+    ),
   ];
 
   static List<dynamic> allBlocProviders(BuildContext context) {
@@ -60,8 +70,10 @@ class AppPages {
       if (result.isNotEmpty) {
         print("first log");
         bool deviceFirstOpen = Global.storageServices.getDeviceFirstOpen();
-        print('valid route ${settings.name}');
-        if (result.first.route == RouteNames.INITIAL && deviceFirstOpen) {
+        if (deviceFirstOpen) {
+          return MaterialPageRoute(
+              builder: (_) => Welcome(), settings: settings);
+        } else {
           bool isLoggedIn = Global.storageServices.getIsLoggedIn();
           if (isLoggedIn) {
             return MaterialPageRoute(
@@ -70,14 +82,17 @@ class AppPages {
           }
 
           print("second log");
-          // Global.storageServices
-          //     .setBool(AppConstants.STORAGE_DEVICE_OPEN_FIRST_TIME, true);
+          Global.storageServices
+              .setBool(AppConstants.STORAGE_DEVICE_OPEN_FIRST_TIME, false);
           return MaterialPageRoute(
               builder: (builder) => const SignIn(), settings: settings);
         }
-        return MaterialPageRoute(
-            builder: (builder) => result.first.page, settings: settings);
+        // print('valid route ${settings.name}');
+        // if (result.first.route == RouteNames.INITIAL && deviceFirstOpen) {
       }
+      // return MaterialPageRoute(
+      //     builder: (builder) => result.first.page, settings: settings);
+      // }
     }
     print('Invalid route name ${settings.name}');
     return MaterialPageRoute(

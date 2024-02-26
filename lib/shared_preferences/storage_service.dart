@@ -21,8 +21,8 @@ class StorageServices {
   bool getIsLoggedIn() {
     return _sharedPreferences.getString(AppConstants.STORAGE_USER_TOKEN_KEY) ==
             null
-        ? false
-        : true;
+        ? true
+        : false;
   }
 
   bool getDeviceFirstOpen() {

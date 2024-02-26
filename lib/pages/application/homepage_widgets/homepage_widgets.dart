@@ -1,6 +1,11 @@
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulerning_app/pages/application/homepage_widgets/home_page.dart';
+import 'package:ulerning_app/pages/application/homepage_widgets/homepage_bloc/homepage_bloc.dart';
+import 'package:ulerning_app/pages/application/homepage_widgets/homepage_bloc/homepage_events.dart';
+import 'package:ulerning_app/pages/application/homepage_widgets/homepage_bloc/homepage_states.dart';
 
 import '../../../constants/colors.dart';
 
@@ -140,3 +145,50 @@ List<BottomNavigationBarItem> bottomTubs = [
     ),
   ),
 ];
+
+Widget sliderShow(BuildContext context, HomePageStates state) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.center,
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Container(
+        height: 160,
+        width: 325,
+        child: PageView(
+          reverse: true,
+          onPageChanged: (value) {
+            print(value.toString());
+            context.read<HomePageBloc>().add(HomePageDots(value));
+          },
+          children: [
+            slidersContainer(path: "assets/icons/Art.png"),
+            slidersContainer(path: "assets/icons/Image_1.png"),
+            slidersContainer(path: "assets/icons/image_2.png"),
+            // Passing path as a named parameter
+          ],
+        ),
+      ),
+      Container(
+        child: DotsIndicator(
+          reversed: true,
+          dotsCount: 3,
+          position: state.index,
+        ),
+      ),
+    ],
+  );
+}
+
+Widget slidersContainer({String path = "assets/icons/Art.png"}) {
+  // defining path as named parameter
+  return Container(
+    margin: EdgeInsets.all(4),
+    height: 160,
+    width: 325,
+    decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(
+          Radius.circular(20),
+        ),
+        image: DecorationImage(fit: BoxFit.fill, image: AssetImage(path))),
+  );
+}
