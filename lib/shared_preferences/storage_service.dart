@@ -30,4 +30,8 @@ class StorageServices {
             .getBool(AppConstants.STORAGE_DEVICE_OPEN_FIRST_TIME) ??
         false;
   }
+
+  Future<bool> remove(String key) {
+    return _sharedPreferences.remove(key);
+  }
 }

@@ -5,4 +5,5 @@ class RouteNames {
   static const WELCOME_PAGE = '/welcome';
   static const REGISTER_PAGE = '/register';
   static const HOME_PAGE = '/homepage';
+  static const SETTINGS_PAGE = '/settings';
 }
