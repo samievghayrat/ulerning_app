@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ulerning_app/constants/constant.dart';
+import 'package:ulerning_app/pages/application/application_bloc/application_bloc.dart';
+import 'package:ulerning_app/pages/application/application_bloc/application_events.dart';
 import 'package:ulerning_app/pages/settings/settings_bloc/setting_states.dart';
 import 'package:ulerning_app/pages/settings/settings_bloc/settings_bloc.dart';
 import 'package:ulerning_app/routes/names.dart';
@@ -41,6 +43,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             child: const Text("Cancel")),
                         TextButton(
                             onPressed: () {
+                              context.read<AppBloc>().add(TriggerEvent(0));
                               Global.storageServices.remove(
                                   AppConstants.STORAGE_USER_PROFILE_KEY);
                               Navigator.of(context).pushNamedAndRemoveUntil(

@@ -40,7 +40,7 @@ class _ApplicationPageState extends State<ApplicationPage> {
                   )
                 ]),
             child: BottomNavigationBar(
-              currentIndex: 4,
+              currentIndex: state.index,
               elevation: 0,
               type: BottomNavigationBarType.fixed,
               showSelectedLabels: false,
