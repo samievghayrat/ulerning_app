@@ -90,9 +90,9 @@ Widget _listOfProfilePageSettings(BuildContext context) {
           Navigator.of(context).pushNamed(RouteNames.REGISTER_PAGE);
         },
       ),
-      listTileItem("Achievements", Icons.card_giftcard),
-      listTileItem("Love", Icons.heart_broken_rounded),
-      listTileItem("Reminders", Icons.wifi_tethering_outlined),
+      // listTileItem("Achievements", Icons.card_giftcard),
+      // listTileItem("Love", Icons.heart_broken_rounded),
+      // listTileItem("Reminders", Icons.wifi_tethering_outlined),
     ],
   );
 }

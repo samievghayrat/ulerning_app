@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      customSubtitle("Choose your course",
+                      customSubtitle("Meet the tutors",
                           font_Size: 16.h, fontWeight: FontWeight.bold),
                       customSubtitle("See all",
                           font_Size: 13.h,
@@ -61,10 +61,10 @@ class _HomePageState extends State<HomePage> {
                   child: Row(
                     children: [
                       courseButton("All"),
-                      courseButton("Popular",
+                      courseButton("New",
                           color: Colors.grey, textColor: Colors.white),
-                      courseButton("Newest",
-                          color: Colors.grey, textColor: Colors.white),
+                      // courseButton("Newest",
+                      //     color: Colors.grey, textColor: Colors.white),
                     ],
                   ),
                 ),
@@ -101,11 +101,11 @@ class _HomePageState extends State<HomePage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               CustomTextWidget(
-                                "Best course in IT",
+                                "Tutors",
                                 13.sp,
                                 Colors.white,
                               ),
-                              customSubtitle("40/45 vocabularies",
+                              customSubtitle("English Language",
                                   color: Colors.grey,
                                   fontWeight: FontWeight.bold,
                                   font_Size: 10.sp)
