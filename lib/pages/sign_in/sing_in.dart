@@ -25,19 +25,20 @@ class _SignInState extends State<SignIn> {
         color: AppColors.primaryWhiteColor,
         child: SafeArea(
           child: Scaffold(
-            appBar: appBarLogIn(state.email),
+            appBar: appBarLogIn('Sign In'),
             body: SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    thirdPartyLogin(context),
-                    reusableText(
-                      'Or use your email account login',
-                    ),
+                    // thirdPartyLogin(context),
+                    // reusableText(
+                    //   'Or use your email account login',
+                    // ),
                     SizedBox(
-                      height: 40.h,
+                      height: 100.h,
                     ),
                     reusableText('Email address'),
                     buildTextField("Please enter your email", "email", "user",
